@@ -30,6 +30,19 @@ public class nodo {
         }
         return "(" + aux +","+y+")";
     }
+    ///Metodos get y set de las clases.
+    public int getX(){
+        return this.x;
+    }
+    public int getY(){
+        return this.y;
+    }
+    public void setX(int valor){
+        this.x = valor;
+    }
+    public void setY(int valor){
+        this.y = valor;
+    }
     ///MOVIMIENTOS DEL CABALLO, CONTANDO EN EL SENTIDO DE LAS MANECILLAS DEL RELOJ
     public nodo arriba1(){
         nodo nuevo = new nodo((this.x -1),(this.y+2));///Se crea un nuevo nodo con las coordenadas del movimiento
