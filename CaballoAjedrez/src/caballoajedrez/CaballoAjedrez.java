@@ -152,8 +152,8 @@ public class CaballoAjedrez {
                          mensajeEncontrado +="Hubo un error al recuperar el texto...";
                             break;
                  }
-                 imprimir(mensajeEncontrado);
              }
+             imprimir(mensajeEncontrado);
              
          }
      }
