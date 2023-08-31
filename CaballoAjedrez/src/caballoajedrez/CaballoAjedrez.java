@@ -55,7 +55,7 @@ public class CaballoAjedrez {
          return valor;///Se retorna el valor convertido
     }
     ///Funcion para verificar si existe historial del nodo creado
-    public boolean existeHistorial(nodo x, ArrayList<nodo> historial){
+    public static boolean existeHistorial(nodo x, ArrayList<nodo> historial){
         for(nodo y:historial){ //para cada nodo en la lista
             if(y.getX() == x.getX() && y.getY() == x.getY()){ //Si es igual al nodo que buscamos 
                 return true;//Se regresa verdadero
