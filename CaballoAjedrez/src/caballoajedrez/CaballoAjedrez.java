@@ -54,6 +54,15 @@ public class CaballoAjedrez {
          //////////////////////////////////////APLICAR CONTROL DE EXCEPCIONES////////////////////////////////////////
          return valor;///Se retorna el valor convertido
     }
+    ///Funcion para verificar si existe historial del nodo creado
+    public boolean existeHistorial(nodo x, ArrayList<nodo> historial){
+        for(nodo y:historial){ //para cada nodo en la lista
+            if(y.getX() == x.getX() && y.getY() == x.getY()){ //Si es igual al nodo que buscamos 
+                return true;//Se regresa verdadero
+            }
+        }
+        return false;///De lo contrario, se regresa falso.
+    }
 
     ///INICIA METODO DE BUSQUEDA POR AMPLITUD
      public static void busquedaAmplitud(nodo nodoInicial, nodo nodoMeta){
@@ -67,7 +76,25 @@ public class CaballoAjedrez {
          listaNodos.add(nodoInicial);
          historialNodos.add(nodoInicial);
          
-         while(!listaNodos.isEmpty() && !encontrado){ ///Mientras que la lista no esta vacia y no se ha encontrado el nodo meta...
+         while(!listaNodos.isEmpty() && !encontrado){
+             ///Muestra la lista en el momento de la iteracion
+             String mensaje = "L(" + nivel + "):  ";
+             nodo auxiliar,hijo;
+             for(nodo u: listaNodos){
+                 mensaje += u.imprimir() + ", ";
+             }
+             
+             ///INICIO DEL ALGORITMO
+             auxiliar = listaNodos.get(0);
+             if(auxiliar.getX() == nodoMeta.getX()){
+                 imprimir("Se ha encontrado la meta");
+                 encontrado = true;
+             }else{
+                 listaNodos.remove(0);
+                 hijo = auxiliar.arriba1();
+                 
+                 
+             }
              
          }
      }
