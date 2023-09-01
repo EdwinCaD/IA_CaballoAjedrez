@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class nodo {
     private int x,y;
-    private ArrayList movimientos = new ArrayList();
+    public ArrayList<Integer> movimientos = new ArrayList();
 
     ///DECLARACION DE LOS CONSTRUCTORES DE LA CLASE
     public nodo (){
