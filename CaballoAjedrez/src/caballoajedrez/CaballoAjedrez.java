@@ -7,14 +7,19 @@ public class CaballoAjedrez {
 
     public static void main(String[] args) {
         int x, y;
+        System.out.println("Mensaje de debug de entrada: ");
         x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo incial");
         y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
+        
         nodo inicio = new nodo(x, y);
-
+        imprimir(inicio.imprimir());
+        System.out.println("Mensaje 2 de debug de entrada: ");
         x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo final");
         y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
         nodo fin = new nodo(x, y);
+        imprimir(fin.imprimir());
         busquedaAmplitud(inicio, fin);
+
     }
 
     /// METODOS UTILES AL IMPLEMENTAR EL MAIN (Impresion de texto, solicitud de
@@ -92,18 +97,11 @@ public class CaballoAjedrez {
         historialNodos.add(nodoInicial);
 
         while (!listaNodos.isEmpty() && !encontrado) {
-            /// Muestra la lista en el momento de la iteracion
-            // String mensaje = "L(" + nivel + "): ";
             nodo auxiliar, hijo;
-            // for(nodo u: listaNodos){
-            // mensaje += u.imprimir() + ", ";
-            // }
-            // imprimir(mensaje);
 
             /// INICIO DEL ALGORITMO
             auxiliar = listaNodos.get(0);
             if (auxiliar.getX() == nodoMeta.getX() && auxiliar.getY() == nodoMeta.getY()) {
-                imprimir("Se ha encontrado la meta");
                 encontrado = true;
             } else {
                 ArrayList<nodo> listaAuxiliar = new ArrayList<nodo>();
@@ -130,16 +128,19 @@ public class CaballoAjedrez {
                     if (!existeHistorial(aux, historialNodos) && aux.esValido()) {
                         listaNodos.add(aux);
                         historialNodos.add(aux);
-                        System.out.println("Se ha inroducido el hijo " + aux.imprimir() + " A la lista");
+                        System.out.println("Se ha inroducido el hijo " + aux.imprimir() + " a la lista");
                     }
                 }
+                System.out.println("Mensajes de debug de lista de nodos y movimientos: ");
             }
             nivel++;
+            System.out.println("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
         }
+        System.out.println(listaNodos.get(0).imprimir());
         if (encontrado) {
             String mensajeEncontrado = "Camino tomado: \n";
             nodo meta = listaNodos.get(0);
-            for (int movimiento : meta.getMovimientos()) {
+            for (int movimiento : meta.movimientos) {
                 switch (movimiento) {
                     case 1:
                         mensajeEncontrado += "Mover arriba a la izquierda \n";
