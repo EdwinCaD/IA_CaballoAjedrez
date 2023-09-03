@@ -83,8 +83,8 @@ public class CaballoAjedrez {
     }
 
     public static void busquedaAmplitud(nodo nodoInicial, nodo nodoMeta) {
-        ArrayList<nodo> listaNodos = new ArrayList();
-        ArrayList<nodo> historialNodos = new ArrayList();
+        ArrayList<nodo> listaNodos = new ArrayList<nodo>();
+        ArrayList<nodo> historialNodos = new ArrayList<nodo>();
         int nivel = 1;
         boolean encontrado = false;
 
@@ -106,7 +106,7 @@ public class CaballoAjedrez {
                 imprimir("Se ha encontrado la meta");
                 encontrado = true;
             } else {
-                ArrayList<nodo> listaAuxiliar = new ArrayList();
+                ArrayList<nodo> listaAuxiliar = new ArrayList<nodo>();
                 listaNodos.remove(0);
                 /// Creacion y verificacion de los hijos
                 hijo = auxiliar.arriba1();
@@ -139,7 +139,7 @@ public class CaballoAjedrez {
         if (encontrado) {
             String mensajeEncontrado = "Camino tomado: \n";
             nodo meta = listaNodos.get(0);
-            for (int movimiento : meta.movimientos) {
+            for (int movimiento : meta.getMovimientos()) {
                 switch (movimiento) {
                     case 1:
                         mensajeEncontrado += "Mover arriba a la izquierda \n";
