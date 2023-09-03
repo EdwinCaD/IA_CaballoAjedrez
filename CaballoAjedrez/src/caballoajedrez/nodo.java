@@ -1,125 +1,104 @@
 package caballoajedrez;
-
+    
 import java.util.ArrayList;
 
 public class nodo {
-    private int x, y;
-    private ArrayList<Integer> movimientos = new ArrayList<Integer>();
+    private int x,y;
+    public ArrayList<Integer> movimientos = new ArrayList<Integer>();
 
-    /// DECLARACION DE LOS CONSTRUCTORES DE LA CLASE
-    public nodo() {
-        x = 0;
-        y = 0;
+    ///DECLARACION DE LOS CONSTRUCTORES DE LA CLASE
+    public nodo (){
+        x=0;
+        y=0;
     }
-
-    public ArrayList<Integer> getMovimientos() {
-        return movimientos;
+    public nodo (int var1, int var2) {
+        x=var1;
+        y=var2;
     }
-
-    public void setMovimientos(ArrayList<Integer> movimientos) {
-        this.movimientos = movimientos;
-    }
-
-    public nodo(int var1, int var2) {
-        x = var1;
-        y = var2;
-    }
-
-    /// METODOS DE LA CLASE
-    public String imprimir() {
-        char aux = 'x';
-        switch (x) {
-            case 1: aux = 'A';
-            case 2: aux = 'B';
-            case 3: aux = 'C';
-            case 4: aux = 'D';
-            case 5: aux = 'E';
-            case 6: aux = 'F';
-            case 7: aux = 'G';
-            case 8: aux = 'H';
+    ///METODOS DE LA CLASE
+    public String imprimir(){
+        char aux='x'; 
+        switch (x){
+            case 1 -> aux = 'A';
+            case 2 -> aux ='B';
+            case 3 -> aux = 'C';
+            case 4 -> aux = 'D';
+            case 5 -> aux = 'E';
+            case 6 -> aux = 'F';
+            case 7 -> aux = 'G';
+            case 8 -> aux = 'H';
         }
-        return "(" + aux + "," + y + ")";
+        return "(" + aux +","+y+")";
     }
-
-    /// Metodos get y set de las clases.
-    public int getX() {
+    ///Metodos get y set de las clases.
+    public int getX(){
         return this.x;
     }
-
-    public int getY() {
+    public int getY(){
         return this.y;
     }
-
-    public void setX(int valor) {
+    public void setX(int valor){
         this.x = valor;
     }
-
-    public void setY(int valor) {
+    public void setY(int valor){
         this.y = valor;
     }
-
-    /// MOVIMIENTOS DEL CABALLO, CONTANDO EN EL SENTIDO DE LAS MANECILLAS DEL RELOJ
-    public nodo arriba1() {
-        nodo nuevo = new nodo((this.x - 1), (this.y + 2));/// Se crea un nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(1);
+    ///MOVIMIENTOS DEL CABALLO, CONTANDO EN EL SENTIDO DE LAS MANECILLAS DEL RELOJ
+    public nodo arriba1(){
+        nodo nuevo = new nodo((this.x -1),(this.y+2));///Se crea un nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(1);
         return nuevo;
     }
-
-    public nodo arriba2() {
-        nodo nuevo = new nodo((this.x + 1), (this.y + 2));/// Se crea un nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(2);
+    public nodo arriba2(){
+        nodo nuevo = new nodo((this.x + 1),(this.y+2));///Se crea un nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(2);
         return nuevo;
-
+        
     }
-
-    public nodo derecha1() {
-        nodo nuevo = new nodo((this.x + 2), (this.y + 1)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(3);
+    public nodo derecha1(){
+        nodo nuevo = new nodo((this.x + 2),(this.y + 1)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(3);
         return nuevo;
     }
-
-    public nodo derecha2() {
-        nodo nuevo = new nodo((this.x + 2), (this.y - 1)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(4);
+    public nodo derecha2(){
+        nodo nuevo = new nodo((this.x + 2),(this.y - 1)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(4);
         return nuevo;
     }
-
-    public nodo abajo1() {
-        nodo nuevo = new nodo((this.x + 1), (this.y - 2)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(5);
+    public nodo abajo1(){
+        nodo nuevo = new nodo((this.x + 1),(this.y - 2)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(5);
         return nuevo;
     }
-
-    public nodo abajo2() {
-        nodo nuevo = new nodo((this.x - 1), (this.y - 2)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(6);
+    public nodo abajo2(){
+        nodo nuevo = new nodo((this.x - 1),(this.y - 2)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(6);
         return nuevo;
     }
-
-    public nodo izquierda1() {
-        nodo nuevo = new nodo((this.x - 2), (this.y - 1)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(7);
+    public nodo izquierda1(){
+        nodo nuevo = new nodo((this.x - 2),(this.y - 1)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(7);
         return nuevo;
     }
-
-    public nodo izquierda2() {
-        nodo nuevo = new nodo((this.x - 2), (this.y + 1)); /// Se cre aun nuevo nodo con las coordenadas del movimiento
-        nuevo.setMovimientos(this.getMovimientos());
-        nuevo.getMovimientos().add(8);
+    public nodo izquierda2(){
+        nodo nuevo = new nodo((this.x - 2),(this.y + 1)); ///Se cre aun nuevo nodo con las coordenadas del movimiento
+        nuevo.movimientos = movimientos;
+        nuevo.movimientos.add(8);
         return nuevo;
     }
-
-    public boolean esValido() {
-        if ((this.x < 1 || this.x > 8) || (this.y < 1 || this.y > 8)) {
+    public boolean esValido(){
+        if((this.x<1 || this.x>8) || (this.y<1 || this.y>8)){
             return false;
         }
         return true;
     }
+
 }
+
