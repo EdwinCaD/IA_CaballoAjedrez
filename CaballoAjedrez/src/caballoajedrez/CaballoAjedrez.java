@@ -7,17 +7,19 @@ public class CaballoAjedrez {
 
     public static void main(String[] args) {
         int x, y;
-        System.out.println("Mensaje de debug de entrada: ");
+        debuggMessage("Mensaje de debug de entrada: ");
         x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo INICIAL");
         y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo INICIAL");
-        
+
         nodo inicio = new nodo(x, y);
-        System.out.println(inicio.imprimir());
-        System.out.println("Mensaje 2 de debug de entrada: ");
+        debuggMessage(inicio.imprimir());
+
+        debuggMessage("Mensaje 2 de debug de entrada: ");
         x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo FINAL");
         y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo FINAL");
+
         nodo fin = new nodo(x, y);
-        System.out.println(fin.imprimir());
+        debuggMessage(fin.imprimir());
         busquedaAmplitud(inicio, fin);
 
     }
@@ -36,6 +38,10 @@ public class CaballoAjedrez {
         JOptionPane.showMessageDialog(null, texto, "Error", 0);
     }
 
+    public static void debuggMessage(String mensaje) {
+        System.out.println(mensaje);
+    }
+
     public static int solicitarX(String mensaje) {
         String texto = JOptionPane.showInputDialog(mensaje);
         int valor = 0;
@@ -43,25 +49,25 @@ public class CaballoAjedrez {
             case "A", "a":
                 valor = 1;
                 break;
-            case "B","b":
+            case "B", "b":
                 valor = 2;
                 break;
-            case "C","c":
+            case "C", "c":
                 valor = 3;
                 break;
-            case "D","d":
+            case "D", "d":
                 valor = 4;
                 break;
-            case "E","e":
+            case "E", "e":
                 valor = 5;
                 break;
-            case "F","f":
+            case "F", "f":
                 valor = 6;
                 break;
-            case "G","g":
+            case "G", "g":
                 valor = 7;
                 break;
-            case "H","h":
+            case "H", "h":
                 valor = 8;
                 break;
             default:
@@ -119,13 +125,13 @@ public class CaballoAjedrez {
                     if (aux.esValido(historialNodos)) {
                         listaNodos.add(aux);
                         historialNodos.add(aux);
-                        System.out.println("Se ha introducido el hijo " + aux.imprimir() + " a la lista");
+                        debuggMessage("Se ha introducido el hijo " + aux.imprimir() + " a la lista");
                     }
                 }
-                System.out.println("Mensajes de debug de lista de nodos y movimientos: ");
+                debuggMessage("Mensajes de debug de lista de nodos y movimientos: ");
             }
             nivel++;
-            System.out.println("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
+            debuggMessage("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
         }
 
         if (encontrado) {
@@ -163,8 +169,14 @@ public class CaballoAjedrez {
                 }
 
             }
+            debuggMessage("Mensaje de debugg relacionado a la lista de nodos recorridos");
+            for (nodo aux : meta.nodosRecorridos) {
+                debuggMessage(aux.imprimir());
+            }
             imprimir(mensajeEncontrado);
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /// APLICACION DE LA INTERFAZ GRÁFICA DE USUARIO QUE REPRESENTA LOS MOVIMIENTOS
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
-
 }
