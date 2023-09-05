@@ -46,7 +46,7 @@ public class nodo {
     ///MOVIMIENTOS DEL CABALLO, CONTANDO EN EL SENTIDO DE LAS MANECILLAS DEL RELOJ
     public nodo arriba1(){
         nodo nuevo = new nodo((this.x -1),(this.y+2));///Se crea un nuevo nodo con las coordenadas del movimiento
-        nuevo.movimientos = (ArrayList)(this.movimientos.clone());
+        nuevo.movimientos = (ArrayList<Integer>)(this.movimientos.clone());
         nuevo.movimientos.add(1);
         return nuevo;
     }
