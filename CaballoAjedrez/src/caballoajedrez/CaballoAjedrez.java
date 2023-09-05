@@ -8,16 +8,16 @@ public class CaballoAjedrez {
     public static void main(String[] args) {
         int x, y;
         System.out.println("Mensaje de debug de entrada: ");
-        x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo incial");
-        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
+        x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo INICIAL");
+        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo INICIAL");
         
         nodo inicio = new nodo(x, y);
-        imprimir(inicio.imprimir());
+        System.out.println(inicio.imprimir());
         System.out.println("Mensaje 2 de debug de entrada: ");
-        x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo final");
-        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
+        x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo FINAL");
+        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo FINAL");
         nodo fin = new nodo(x, y);
-        imprimir(fin.imprimir());
+        System.out.println(fin.imprimir());
         busquedaAmplitud(inicio, fin);
 
     }
@@ -40,28 +40,28 @@ public class CaballoAjedrez {
         String texto = JOptionPane.showInputDialog(mensaje);
         int valor = 0;
         switch (texto) {
-            case "A":
+            case "A", "a":
                 valor = 1;
                 break;
-            case "B":
+            case "B","b":
                 valor = 2;
                 break;
-            case "C":
+            case "C","c":
                 valor = 3;
                 break;
-            case "D":
+            case "D","d":
                 valor = 4;
                 break;
-            case "E":
+            case "E","e":
                 valor = 5;
                 break;
-            case "F":
+            case "F","f":
                 valor = 6;
                 break;
-            case "G":
+            case "G","g":
                 valor = 7;
                 break;
-            case "H":
+            case "H","h":
                 valor = 8;
                 break;
             default:
@@ -75,16 +75,6 @@ public class CaballoAjedrez {
         String texto = JOptionPane.showInputDialog(mensaje);
         int valor = Integer.parseInt(texto);
         return valor;
-    }
-
-    /// Funcion para verificar si existe historial del nodo creado
-    public static boolean existeHistorial(nodo x, ArrayList<nodo> historial) {
-        for (nodo y : historial) { // para cada nodo en la lista
-            if (y.getX() == x.getX() && y.getY() == x.getY()) { // Si es igual al nodo que buscamos
-                return true;// Se regresa verdadero
-            }
-        }
-        return false;/// De lo contrario, se regresa falso.
     }
 
     public static void busquedaAmplitud(nodo nodoInicial, nodo nodoMeta) {
@@ -102,6 +92,7 @@ public class CaballoAjedrez {
             /// INICIO DEL ALGORITMO
             auxiliar = listaNodos.get(0);
             if (auxiliar.getX() == nodoMeta.getX() && auxiliar.getY() == nodoMeta.getY()) {
+                imprimir("Se ha encontrado la meta");
                 encontrado = true;
             } else {
                 ArrayList<nodo> listaAuxiliar = new ArrayList<nodo>();
@@ -125,10 +116,10 @@ public class CaballoAjedrez {
                 listaAuxiliar.add(hijo);
 
                 for (nodo aux : listaAuxiliar) {
-                    if (!existeHistorial(aux, historialNodos) && aux.esValido()) {
+                    if (aux.esValido(historialNodos)) {
                         listaNodos.add(aux);
                         historialNodos.add(aux);
-                        System.out.println("Se ha inroducido el hijo " + aux.imprimir() + " a la lista");
+                        System.out.println("Se ha introducido el hijo " + aux.imprimir() + " a la lista");
                     }
                 }
                 System.out.println("Mensajes de debug de lista de nodos y movimientos: ");
@@ -136,7 +127,7 @@ public class CaballoAjedrez {
             nivel++;
             System.out.println("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
         }
-        System.out.println(listaNodos.get(0).imprimir());
+
         if (encontrado) {
             String mensajeEncontrado = "Camino tomado: \n";
             nodo meta = listaNodos.get(0);
