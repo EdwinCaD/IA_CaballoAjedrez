@@ -241,5 +241,4 @@ public class CaballoAjedrez {
             imprimir(mensajeEncontrado);
         }
     }
-
 }
