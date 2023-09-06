@@ -6,26 +6,60 @@ import javax.swing.JOptionPane;
 public class CaballoAjedrez {
 
     public static void main(String[] args) {
-        int x, y;
-        debuggMessage("Mensaje de debug de entrada: ");
-        x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo INICIAL");
-        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo INICIAL");
-
+        int x=0, y;
+        System.out.println("Mensaje de debug de entrada: ");
+        while(x==0)
+        {    
+        x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo incial");
+        }
+        
+        
+        do{
+        y=0;    
+       
+        try{
+        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
+        }catch(NumberFormatException e)
+        {
+            advertencia("Dato utilizado no es un número entero");
+        }
+        }while(y==0);
+        
         nodo inicio = new nodo(x, y);
-        debuggMessage(inicio.imprimir());
-
-        debuggMessage("Mensaje 2 de debug de entrada: ");
-        x = solicitarX("Ingrese el valor de x (LETRAS A - H) del nodo FINAL");
-        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo FINAL");
-
+        imprimir(inicio.imprimir());
+        System.out.println("Mensaje 2 de debug de entrada: ");
+        x=0;
+        while(x==0)
+        {    
+        x = solicitarX("Ingrese el valor de x (LETRAS MAYUSCULAS) del nodo final");
+        }
+        do{
+        y=0;    
+       
+        try{
+        y = solicitarY("Ingrese el valor de y (NUMERO ENTERO) del nodo inicial");
+        }catch(NumberFormatException e)
+        {
+            advertencia("Dato utilizado no es un número entero");
+        }
+        }while(y==0);
         nodo fin = new nodo(x, y);
-        debuggMessage(fin.imprimir());
+        imprimir(fin.imprimir());
         busquedaAmplitud(inicio, fin);
 
     }
 
     /// METODOS UTILES AL IMPLEMENTAR EL MAIN (Impresion de texto, solicitud de
     /// datos
+    public static boolean validar_x(String x)
+    {
+        boolean valido=true;
+        if(x.length()>1 || x.matches("<>#$%&/()=?¡¿+")|| x.matches("[0-9]*")|| x.matches("[I-Z]*")|| x.matches("[i-z]*"))
+        {
+            valido= false;
+        }
+        return valido;
+    }
     public static void imprimir(String texto) {
         JOptionPane.showMessageDialog(null, texto, "Bandera", 1);
     }
@@ -38,41 +72,67 @@ public class CaballoAjedrez {
         JOptionPane.showMessageDialog(null, texto, "Error", 0);
     }
 
-    public static void debuggMessage(String mensaje) {
-        System.out.println(mensaje);
-    }
-
     public static int solicitarX(String mensaje) {
+        int valor=0;  
         String texto = JOptionPane.showInputDialog(mensaje);
-        int valor = 0;
+        if(validar_x(texto))
+        { 
         switch (texto) {
-            case "A", "a":
+            case "A":
                 valor = 1;
                 break;
-            case "B", "b":
+            case "B":
                 valor = 2;
                 break;
-            case "C", "c":
+            case "C":
                 valor = 3;
                 break;
-            case "D", "d":
+            case "D":
                 valor = 4;
                 break;
-            case "E", "e":
+            case "E":
                 valor = 5;
                 break;
-            case "F", "f":
+            case "F":
                 valor = 6;
                 break;
-            case "G", "g":
+            case "G":
                 valor = 7;
                 break;
-            case "H", "h":
+            case "H":
+                valor = 8;
+                break;
+            case "a":
+                valor = 1;
+                break;
+            case "b":
+                valor = 2;
+                break;
+            case "c":
+                valor = 3;
+                break;
+            case "d":
+                valor = 4;
+                break;
+            case "e":
+                valor = 5;
+                break;
+            case "f":
+                valor = 6;
+                break;
+            case "g":
+                valor = 7;
+                break;
+            case "h":
                 valor = 8;
                 break;
             default:
                 valor = -1;
                 break;
+        }
+        }else
+        {
+          advertencia("El dato introducido no es un letra o es más de una letra, intente de nuevo");  
         }
         return valor;
     }
@@ -81,6 +141,16 @@ public class CaballoAjedrez {
         String texto = JOptionPane.showInputDialog(mensaje);
         int valor = Integer.parseInt(texto);
         return valor;
+    }
+
+    /// Funcion para verificar si existe historial del nodo creado
+    public static boolean existeHistorial(nodo x, ArrayList<nodo> historial) {
+        for (nodo y : historial) { // para cada nodo en la lista
+            if (y.getX() == x.getX() && y.getY() == x.getY()) { // Si es igual al nodo que buscamos
+                return true;// Se regresa verdadero
+            }
+        }
+        return false;/// De lo contrario, se regresa falso.
     }
 
     public static void busquedaAmplitud(nodo nodoInicial, nodo nodoMeta) {
@@ -98,7 +168,6 @@ public class CaballoAjedrez {
             /// INICIO DEL ALGORITMO
             auxiliar = listaNodos.get(0);
             if (auxiliar.getX() == nodoMeta.getX() && auxiliar.getY() == nodoMeta.getY()) {
-                imprimir("Se ha encontrado la meta");
                 encontrado = true;
             } else {
                 ArrayList<nodo> listaAuxiliar = new ArrayList<nodo>();
@@ -122,22 +191,22 @@ public class CaballoAjedrez {
                 listaAuxiliar.add(hijo);
 
                 for (nodo aux : listaAuxiliar) {
-                    if (aux.esValido(historialNodos)) {
+                    if (!existeHistorial(aux, historialNodos) && aux.esValido()) {
                         listaNodos.add(aux);
                         historialNodos.add(aux);
-                        debuggMessage("Se ha introducido el hijo " + aux.imprimir() + " a la lista");
+                        System.out.println("Se ha inroducido el hijo " + aux.imprimir() + " a la lista");
                     }
                 }
-                debuggMessage("Mensajes de debug de lista de nodos y movimientos: ");
+                System.out.println("Mensajes de debug de lista de nodos y movimientos: ");
             }
             nivel++;
-            debuggMessage("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
+            System.out.println("Se ha terminado la iteracion... iniciando la " + nivel + " Iteracion");
         }
-
+        System.out.println(listaNodos.get(0).imprimir());
         if (encontrado) {
             String mensajeEncontrado = "Camino tomado: \n";
             nodo meta = listaNodos.get(0);
-            for (int movimiento : meta.movimientos) {
+            for (int movimiento : meta.movimientos) { ///Para cada movimiento entero hay un movimiento del nodo meta
                 switch (movimiento) {
                     case 1:
                         mensajeEncontrado += "Mover arriba a la izquierda \n";
@@ -169,14 +238,7 @@ public class CaballoAjedrez {
                 }
 
             }
-            debuggMessage("Mensaje de debugg relacionado a la lista de nodos recorridos");
-            for (nodo aux : meta.nodosRecorridos) {
-                debuggMessage(aux.imprimir());
-            }
             imprimir(mensajeEncontrado);
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            /// APLICACION DE LA INTERFAZ GRÁFICA DE USUARIO QUE REPRESENTA LOS MOVIMIENTOS
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////
         }
     }
 }
